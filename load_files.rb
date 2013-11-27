@@ -21,7 +21,14 @@ system('mkdir cda')
 }.each do |section, paths|
   dir = section.gsub(' ','_').downcase
   system("mkdir cda/#{dir}")
+  system("mkdir fhir/#{dir}")
   paths.each do |pth|
     system("cd cda/#{dir} && wget #{pth}")
+    fhile_name = File.basename(pth)
+    fhile_path = "fhir/#{dir}/#{fhile_name}"
+
+    unless File.exists?(fhile_path)
+     system("echo '<TODO>' >> #{fhile_path}")
+    end
   end
 end
