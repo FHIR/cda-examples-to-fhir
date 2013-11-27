@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Allergies Domain Examples -->
+
+<!-- *********** Example 1: Patient with allergies to different substances *********** -->
+<component>
+    <section>
+        <!-- Allergies section with entries required -->
+        <templateId root="2.16.840.1.113883.10.20.22.2.6.1"/>
+        <code code="48765-2" codeSystem="2.16.840.1.113883.6.1"/>
+        <title>ALLERGIES AND ADVERSE REACTIONS</title>
+        <text>
+            <table border="1" width="100%">
+                <thead>
+                    <tr>
+                        <th>Substance</th>
+                        <th>Reaction</th>
+                        <th>Severity of Reaction</th>
+                        <th>Severity of Allergy/Intolerance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <content ID="substance1">Erythromycin 0.02 MG/MG Topical Gel</content>
+                        </td>
+                        <td>
+                            <content ID="reaction1">Hives</content>
+                        </td>
+                        <td>
+                            <content ID="reactionseverity1">Moderate</content>
+                        </td>
+                        <td>
+                            <content ID="allergyseverity1">Moderate to severe</content>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <content ID="substance2">Bactrim</content>
+                        </td>
+                        <td>
+                            <content ID="reaction2">Tongue swelling</content>
+                        </td>
+                        <td>
+                            <content ID="reactionseverity2">Mild to moderate</content>
+                        </td>
+                        <td>
+                            <content ID="allergyseverity2">Moderate</content>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <content ID="substance3">Peanut</content>
+                        </td>
+                        <td>
+                            <content ID="reaction3">Anaphylaxis</content>
+                        </td>
+                        <td>
+                            <content ID="reactionseverity3">Severe</content>
+                        </td>
+                        <td>
+                            <content ID="allergyseverity3">Severe</content>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <content ID="substance4">Felis Catus Dander</content>
+                        </td>
+                        <td>
+                            <content ID="reaction4">Eye Swelling</content>
+                        </td>
+                        <td>
+                            <content ID="reactionseverity4">Mild</content>
+                        </td>
+                        <td>
+                            <content ID="allergyseverity4">Mild to moderate</content>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </text>
+        
+        <!-- Medication allergy: Erythromycin -->
+        <!-- The allergy problem act contains nested clinical statements associated with the allergy/intolerance -->
+        <entry typeCode="DRIV">
+            <!-- Entry typeCode value 'DRIV' indicates that section narrative is derived from the entry -->
+            <act classCode="ACT" moodCode="EVN">
+                <!-- Allergy problem act template -->
+                <templateId root="2.16.840.1.113883.10.20.22.4.30"/>
+                <id root="372e09ea-4047-4d3d-973f-ca8ebd0167cf"/>
+                <code code="CONC" codeSystem="2.16.840.1.113883.5.6"/>
+                <!-- The statusCode represents the need to continue tracking the allergy -->
+                <statusCode code="active"/>
+                <!-- 'Active' indicates that this is of ongoing concern to the provider -->
+                <effectiveTime>
+                    <!-- The low value represents when the allergy was first recorded in the patient's chart -->
+                    <low value="199805011145-0800"/>
+                </effectiveTime>
+                <!-- This author participant indicates the provider who recorded the allergy -->
+                <author>
+                    <!-- Same as when the allergy was first recorded in the patient's chart -->
+                    <time value="199805011145-0800"/>
+                    <assignedAuthor>
+                        <id extension="66778899" root="2.16.840.1.113883.4.6"/>
+                        <!-- This ID points back to a provider described in the header -->
+                    </assignedAuthor>
+                </author>
+                
+                <!-- The entryRelationship typeCode describes the relationship between the allergy act and 
+                    the nested allergy/intolerance observation -->
+                <entryRelationship typeCode="SUBJ" inversionInd="true">
+                    <!-- 'SUBJ' indicates that the allergy act is the outer element and the 
+                        allergy/intolerance observation is the inner element -->
+                    <observation classCode="OBS" moodCode="EVN">
+                        <!-- Allergy/intolerance observation template -->
+                        <templateId root="2.16.840.1.113883.10.20.22.4.7"/>
+                        <id root="116ab756-4b6a-4ff0-8898-efb5e886f507"/>
+                        <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
+                        <!-- 'ASSERTION' indicates that the observation code is a finding or other nominalized statement -->
+                        <!-- The text reference points back to the narrative -->
+                        <text>
+                            <reference value="#substance1"/>
+                        </text>
+                        <!-- Observation statusCode represents the status of the observation itself -->
+                        <statusCode code="completed"/>
+                        <effectiveTime>
+                            <!-- The low value reflects the date of onset of the allergy -->
+                            <low value="19951201"/>
+                            <!-- Absence of effectiveTime/high means the allergy/intolerance is not resolved -->
+                        </effectiveTime>
+                        <value xsi:type="CD" code="416098002" displayName="Drug allergy"
+                            codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+                        <!-- This participant is used to describe the substance responsible for the allergy/intolerance -->
+                        <participant typeCode="CSM">
+                            <!-- 'CSM' indicates that the substance is consumable; this will be the value for all substances -->
+                            <participantRole classCode="MANU">
+                                <playingEntity classCode="MMAT">
+                                    <!-- Common MU Data Set: medication allergies; 
+                                        vocab requirement: RxNorm, August 6, 2012 Release -->
+                                    <code code="310152" displayName="Erythromycin 0.02 MG/MG Topical Gel"
+                                        codeSystem="2.16.840.1.113883.6.88"
+                                        codeSystemName="RxNorm">
+                                        <!-- The translation contains an alternate code for substance -->
+                                        <translation code="63937KV33D" displayName="Erythromycin" 
+                                            codeSystemName="UNII" codeSystem="2.16.840.1.113883.4.9"/>
+                                    </code>
+                                </playingEntity>
+                            </participantRole>
+                        </participant>
+                        
+                        <entryRelationship typeCode="MFST" inversionInd="true">
+                            <!-- 'MFST' indicates that this reaction is a manifestation of 
+                                exposure to the substance-->
+                            <observation classCode="OBS" moodCode="EVN">
+                                <!-- Reaction observation template -->
+                                <templateId root="2.16.840.1.113883.10.20.22.4.9"/>
+                                <id root="0d93556b-ad77-4e88-ae62-f50d43560c52"/>
+                                <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
+                                <text>
+                                    <reference value="#reaction1"/>
+                                </text>
+                                <statusCode code="completed"/>
+                                <effectiveTime>
+                                    <low value="199512011205-0800"/>
+                                    <high value="199512020835-0800"/>
+                                </effectiveTime>
+                                <value xsi:type="CD" code="126485001"
+                                    codeSystem="2.16.840.1.113883.6.96" displayName="Urticaria"/>
+                                
+                                <!-- This severity observation describes the severity of the reaction -->
+                                <entryRelationship typeCode="SUBJ" inversionInd="true">
+                                    <observation classCode="OBS" moodCode="EVN">
+                                        <!-- Severity observation template -->
+                                        <templateId
+                                            root="2.16.840.1.113883.10.20.22.4.8"/>
+                                        <code code="SEV" displayName="Severity Observation"
+                                            codeSystem="2.16.840.1.113883.5.4" codeSystemName="ActCode"/>
+                                        <text>
+                                            <reference value="#reactionseverity1"/>
+                                        </text>
+                                        <statusCode code="completed"/>
+                                        <value xsi:type="CD" code="6736007" displayName="Moderate"
+                                            codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+                                    </observation>
+                                </entryRelationship>
+                            </observation>
+                        </entryRelationship>
+                        
+                        <!-- This severity observation describes the severity of the allergy/intolerance -->
+                        <entryRelationship typeCode="SUBJ" inversionInd="true">
+                            <observation classCode="OBS" moodCode="EVN">
+                                <!-- Severity observation template -->
+                                <templateId root="2.16.840.1.113883.10.20.22.4.8"/>
+                                <code code="SEV" displayName="Severity Observation"
+                                    codeSystem="2.16.840.1.113883.5.4" codeSystemName="ActCode"/>
+                                <text>
+                                    <reference value="#allergyseverity1"/>
+                                </text>
+                                <statusCode code="completed"/>
+                                <value xsi:type="CD" code="371924009" displayName="Moderate to severe"
+                                    codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+                            </observation>
+                        </entryRelationship>
+                    </observation>
+                </entryRelationship>
+            </act>
+        </entry>
+        
+        <!-- Medication allergy: Bactrim -->
+        <!-- The allergy problem act contains nested clinical statements associated with the allergy/intolerance -->
+        <entry typeCode="DRIV">
+            <!-- Entry typeCode value 'DRIV' indicates that section narrative is derived from the entry -->
+            <act classCode="ACT" moodCode="EVN">
+                <!-- Allergy problem act template -->
+                <templateId root="2.16.840.1.113883.10.20.22.4.30"/>
+                <id root="4ffd3420-0f60-425c-aaca-6255c8d8c890"/>
+                <code code="CONC" codeSystem="2.16.840.1.113883.5.6"/>
+                <!-- The statusCode represents the need to continue tracking the allergy -->
+                <statusCode code="active"/>
+                <!-- 'Active' indicates that this is of ongoing concern to the provider -->
+                <effectiveTime>
+                    <!-- The low value represents when the allergy was first recorded in the patient's chart -->
+                    <low value="200808010915-0800"/>
+                </effectiveTime>
+                <!-- This author participant indicates the provider who recorded the allergy -->
+                <author>
+                    <!-- Same as when the allergy was first recorded in the patient's chart -->
+                    <time value="200808010915-0800"/>
+                    <assignedAuthor>
+                        <id extension="22334455" root="2.16.840.1.113883.4.6"/>
+                        <!-- This ID points back to a provider described in the header -->
+                    </assignedAuthor>
+                </author>
+                
+                <!-- The entryRelationship typeCode describes the relationship between the allergy act and 
+                    the nested allergy/intolerance observation -->
+                <entryRelationship typeCode="SUBJ" inversionInd="true">
+                    <!-- 'SUBJ' indicates that the allergy act is the outer element and the 
+                        allergy/intolerance observation is the inner element -->
+                    <observation classCode="OBS" moodCode="EVN">
+                        <!-- Allergy/intolerance observation template -->
+                        <templateId root="2.16.840.1.113883.10.20.22.4.7"/>
+                        <id root="7db863de-8f1b-4684-8a6d-d96add4322b0"/>
+                        <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
+                        <!-- 'ASSERTION' indicates that the observation code is a finding or other nominalized statement -->
+                        <!-- The text reference points back to the narrative -->
+                        <text>
+                            <reference value="#substance2"/>
+                        </text>
+                        <!-- Observation statusCode represents the status of the observation itself -->
+                        <statusCode code="completed"/>
+                        <effectiveTime>
+                            <!-- The low value reflects the date of onset of the allergy -->
+                            <low value="1992"/>
+                            <!-- Patient has estimated the year when the allergy was known to be active -->
+                        </effectiveTime>
+                        <value xsi:type="CD" code="416098002" displayName="Drug allergy"
+                            codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+                        <!-- This participant is used to describe the substance responsible for the allergy/intolerance -->
+                        <participant typeCode="CSM">
+                            <!-- 'CSM' indicates that the substance is consumable; this will be the value for all substances -->
+                            <participantRole classCode="MANU">
+                                <playingEntity classCode="MMAT">
+                                    <!-- Common MU Data Set: medication allergies; 
+                                        vocab requirement: RxNorm, August 6, 2012 Release -->
+                                    <code code="151399" displayName="Bactrim"
+                                        codeSystem="2.16.840.1.113883.6.88"
+                                        codeSystemName="RxNorm">
+                                    </code>
+                                </playingEntity>
+                            </participantRole>
+                        </participant>
+                        
+                        <entryRelationship typeCode="MFST" inversionInd="true">
+                            <!-- 'MFST' indicates that this reaction is a manifestation of 
+                                exposure to the substance-->
+                            <observation classCode="OBS" moodCode="EVN">
+                                <!-- Reaction observation template -->
+                                <templateId root="2.16.840.1.113883.10.20.22.4.9"/>
+                                <id root="b6a9f22d-aec3-42e2-ad76-f72b5e005e13"/>
+                                <code code="ASSERTION"
+                                    codeSystem="2.16.840.1.113883.5.4"/>
+                                <text>
+                                    <reference value="#reaction2"/>
+                                </text>
+                                <statusCode code="completed"/>
+                                <effectiveTime>
+                                    <low value="19921001"/>
+                                    <high value="19921001"/>
+                                </effectiveTime>
+                                <value xsi:type="CD" code="421262002"
+                                    codeSystem="2.16.840.1.113883.6.96" displayName="Tongue swelling"/>
+                                
+                                <!-- This severity observation describes the severity of the reaction -->
+                                <entryRelationship typeCode="SUBJ" inversionInd="true">
+                                    <observation classCode="OBS" moodCode="EVN">
+                                        <!-- Severity observation template -->
+                                        <templateId
+                                            root="2.16.840.1.113883.10.20.22.4.8"/>
+                                        <code code="SEV" displayName="Severity Observation"
+                                            codeSystem="2.16.840.1.113883.5.4" codeSystemName="ActCode"/>
+                                        <text>
+                                            <reference value="#reactionseverity2"/>
+                                        </text>
+                                        <statusCode code="completed"/>
+                                        <value xsi:type="CD" code="371923003" displayName="Mild to moderate"
+                                            codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+                                    </observation>
+                                </entryRelationship>
+                            </observation>
+                        </entryRelationship>
+                        
+                        <!-- This severity observation describes the severity of the allergy/intolerance -->
+                        <entryRelationship typeCode="SUBJ" inversionInd="true">
+                            <observation classCode="OBS" moodCode="EVN">
+                                <!-- Severity observation template -->
+                                <templateId root="2.16.840.1.113883.10.20.22.4.8"/>
+                                <code code="SEV" displayName="Severity Observation"
+                                    codeSystem="2.16.840.1.113883.5.4" codeSystemName="ActCode"/>
+                                <text>
+                                    <reference value="#allergyseverity2"/>
+                                </text>
+                                <statusCode code="completed"/>
+                                <value xsi:type="CD" code="6736007" displayName="Moderate"
+                                    codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+                            </observation>
+                        </entryRelationship>
+                    </observation>
+                </entryRelationship>
+            </act>
+        </entry>
+        
+        <!-- Food allergy: peanuts -->
+        <!-- The allergy problem act contains nested clinical statements associated with the allergy/intolerance -->
+        <entry typeCode="DRIV">
+            <!-- Entry typeCode value 'DRIV' indicates that section narrative is derived from the entry -->
+            <act classCode="ACT" moodCode="EVN">
+                <!-- Allergy problem act template -->
+                <templateId root="2.16.840.1.113883.10.20.22.4.30"/>
+                <id root="d75db1d8-f9ff-424f-88ee-35d6ffd43323"/>
+                <code code="CONC" codeSystem="2.16.840.1.113883.5.6"/>
+                <!-- The statusCode represents the need to continue tracking the allergy -->
+                <statusCode code="active"/>
+                <!-- 'Active' indicates that this is of ongoing concern to the provider -->
+                <effectiveTime>
+                    <!-- The low value represents when the allergy was first recorded in the patient's chart -->
+                    <low value="199805011145-0800"/>
+                </effectiveTime>
+                <!-- This author participant indicates the provider who recorded the allergy -->
+                <author>
+                    <!-- Same as when the allergy was first recorded in the patient's chart -->
+                    <time value="199805011145-0800"/>
+                    <assignedAuthor>
+                        <id extension="66778899" root="2.16.840.1.113883.4.6"/>
+                        <!-- This ID points back to a provider described in the header -->
+                    </assignedAuthor>
+                </author>
+                
+                <!-- The entryRelationship typeCode describes the relationship between the allergy act and 
+                    the nested allergy/intolerance observation -->
+                <entryRelationship typeCode="SUBJ" inversionInd="true">
+                    <!-- 'SUBJ' indicates that the allergy act is the outer element and the 
+                        allergy/intolerance observation is the inner element -->
+                    <observation classCode="OBS" moodCode="EVN">
+                        <!-- Allergy/intolerance observation template -->
+                        <templateId root="2.16.840.1.113883.10.20.22.4.7"/>
+                        <id root="e70b70c6-48d2-47af-8138-9470ed249bab"/>
+                        <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
+                        <!-- 'ASSERTION' indicates that the observation code is a finding or other nominalized statement -->
+                        <!-- The text reference points back to the narrative -->
+                        <text>
+                            <reference value="#substance3"/>
+                        </text>
+                        <!-- Observation statusCode represents the status of the observation itself -->
+                        <statusCode code="completed"/>
+                        <effectiveTime>
+                            <!-- The low value reflects the date of onset of the allergy -->
+                            <low value="1988"/>
+                            <!-- Patient has estimated the year when the allergy was known to be active -->
+                        </effectiveTime>
+                        <value xsi:type="CD" code="414285001" displayName="Food allergy"
+                            codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+                        <!-- This author participant indicates the provider who observed the allergy/intolerance -->
+                        <author>
+                            <time value="199805011145-0800"/>
+                            <assignedAuthor>
+                                <id extension="66778899" root="2.16.840.1.113883.4.6"/>
+                                <!-- This ID points back to a provider described in the header -->
+                            </assignedAuthor>
+                        </author>
+                        <!-- This participant is used to describe the substance responsible for the allergy/intolerance -->
+                        <participant typeCode="CSM">
+                            <!-- 'CSM' indicates that the substance is consumable; this will be the value for all substances -->
+                            <participantRole classCode="MANU">
+                                <playingEntity classCode="MMAT">
+                                    <code code="QE1QX61B99R" displayName="PEANUT"
+                                        codeSystemName="UNII" codeSystem="2.16.840.1.113883.4.9">
+                                    </code>
+                                </playingEntity>
+                            </participantRole>
+                        </participant>
+                        
+                        <entryRelationship typeCode="MFST" inversionInd="true">
+                            <!-- 'MFST' indicates that this reaction is a manifestation of 
+                                exposure to the substance-->
+                            <observation classCode="OBS" moodCode="EVN">
+                                <!-- Reaction observation template -->
+                                <templateId root="2.16.840.1.113883.10.20.22.4.9"/>
+                                <id root="8927c5d5-1b20-4ea2-9538-55045e4998a4"/>
+                                <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
+                                <text>
+                                    <reference value="#reaction3"/>
+                                </text>
+                                <statusCode code="completed"/>
+                                <effectiveTime nullFlavor="UNK"/>
+                                <!-- 'UNK' indicates that when the time when the reaction occurred is unknown -->
+                                <value xsi:type="CD" code="39579001"
+                                    codeSystem="2.16.840.1.113883.6.96" displayName="Anaphylaxis"/>
+                                
+                                <!-- This severity observation describes the severity of the reaction -->
+                                <entryRelationship typeCode="SUBJ" inversionInd="true">
+                                    <observation classCode="OBS" moodCode="EVN">
+                                        <!-- Severity observation template -->
+                                        <templateId
+                                            root="2.16.840.1.113883.10.20.22.4.8"/>
+                                        <code code="SEV" displayName="Severity Observation"
+                                            codeSystem="2.16.840.1.113883.5.4" codeSystemName="ActCode"/>
+                                        <text>
+                                            <reference value="#reactionseverity3"/>
+                                        </text>
+                                        <statusCode code="completed"/>
+                                        <value xsi:type="CD" code="24484000" displayName="Severe"
+                                            codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+                                    </observation>
+                                </entryRelationship>
+                            </observation>
+                        </entryRelationship>
+                        
+                        <!-- This severity observation describes the severity of the allergy/intolerance -->
+                        <entryRelationship typeCode="SUBJ" inversionInd="true">
+                            <observation classCode="OBS" moodCode="EVN">
+                                <!-- Severity observation template -->
+                                <templateId root="2.16.840.1.113883.10.20.22.4.8"/>
+                                <code code="SEV" displayName="Severity Observation"
+                                    codeSystem="2.16.840.1.113883.5.4" codeSystemName="ActCode"/>
+                                <text>
+                                    <reference value="#allergyseverity3"/>
+                                </text>
+                                <statusCode code="completed"/>
+                                <value xsi:type="CD" code="24484000" displayName="Severe"
+                                    codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+                            </observation>
+                        </entryRelationship>
+                    </observation>
+                </entryRelationship>
+            </act>
+        </entry>
+        
+        <!-- Animal allergy: cat dander -->
+        <!-- The allergy problem act contains nested clinical statements associated with the allergy/intolerance -->
+        <entry typeCode="DRIV">
+            <!-- Entry typeCode value 'DRIV' indicates that section narrative is derived from the entry -->
+            <act classCode="ACT" moodCode="EVN">
+                <!-- Allergy problem act template -->
+                <templateId root="2.16.840.1.113883.10.20.22.4.30"/>
+                <id root="dd8f01c9-fb0d-4744-aeda-75e7f208dca7"/>
+                <code code="CONC" codeSystem="2.16.840.1.113883.5.6"/>
+                <!-- The statusCode represents the need to continue tracking the allergy -->
+                <statusCode code="active"/>
+                <!-- 'Active' indicates that this is of ongoing concern to the provider -->
+                <effectiveTime>
+                    <!-- The low value represents when the allergy was first recorded in the patient's chart -->
+                    <low value="199805011145-0800"/>
+                </effectiveTime>
+                <!-- This author participant indicates the provider who recorded the allergy -->
+                <author>
+                    <!-- Same as when the allergy was first recorded in the patient's chart -->
+                    <time value="199805011145-0800"/>
+                    <assignedAuthor>
+                        <id extension="66778899" root="2.16.840.1.113883.4.6"/>
+                        <!-- This ID points back to a provider described in the header -->
+                    </assignedAuthor>
+                </author>
+                
+                <!-- The entryRelationship typeCode describes the relationship between the allergy act and 
+                    the nested allergy/intolerance observation -->
+                <entryRelationship typeCode="SUBJ" inversionInd="true">
+                    <!-- 'SUBJ' indicates that the allergy act is the outer element and the 
+                        allergy/intolerance observation is the inner element -->
+                    <observation classCode="OBS" moodCode="EVN">
+                        <!-- Allergy/intolerance observation template -->
+                        <templateId root="2.16.840.1.113883.10.20.22.4.7"/>
+                        <id root="ed0ecdda-9e76-4d2b-b5df-8339b37af255"/>
+                        <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
+                        <!-- 'ASSERTION' indicates that the observation code is a finding or other nominalized statement -->
+                        <!-- The text reference points back to the narrative -->
+                        <text>
+                            <reference value="#substance4"/>
+                        </text>
+                        <!-- Observation statusCode represents the status of the observation itself -->
+                        <statusCode code="completed"/>
+                        <effectiveTime>
+                            <!-- The low value reflects the date of onset of the allergy -->
+                            <low value="1988"/>
+                            <!-- Patient has estimated the year when the allergy was known to be active -->
+                        </effectiveTime>
+                        <value xsi:type="CD" code="419199007" displayName="Allergy to substance"
+                            codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+                        <!-- This participant is used to describe the substance responsible for the allergy/intolerance -->
+                        <participant typeCode="CSM">
+                            <!-- 'CSM' indicates that the substance is consumable; this will be the value for all substances -->
+                            <participantRole classCode="MANU">
+                                <playingEntity classCode="MMAT">
+                                    <code code="ZDNZAC0L08" displayName="Felis catus dander"
+                                        codeSystemName="UNII" codeSystem="2.16.840.1.113883.4.9">
+                                    </code>
+                                </playingEntity>
+                            </participantRole>
+                        </participant>
+                        
+                        <entryRelationship typeCode="MFST" inversionInd="true">
+                            <!-- 'MFST' indicates that this reaction is a manifestation of 
+                                exposure to the substance-->
+                            <observation classCode="OBS" moodCode="EVN">
+                                <!-- Reaction observation template -->
+                                <templateId root="2.16.840.1.113883.10.20.22.4.9"/>
+                                <id root="5e92ec19-0cb6-4efc-b323-337861a9a10b"/>
+                                <code code="ASSERTION"
+                                    codeSystem="2.16.840.1.113883.5.4"/>
+                                <text>
+                                    <reference value="#reaction4"/>
+                                </text>
+                                <statusCode code="completed"/>
+                                <!-- A reaction to cat dander was observed for 3 days in January 2009 -->
+                                <effectiveTime>
+                                    <low value="20090116"/>
+                                    <high value="2009019"/>
+                                </effectiveTime>
+                                <value xsi:type="CD" code="45177002"
+                                    codeSystem="2.16.840.1.113883.6.96" displayName="Eye swelling"/>
+                                
+                                <!-- This severity observation describes the severity of the reaction -->
+                                <entryRelationship typeCode="SUBJ" inversionInd="true">
+                                    <observation classCode="OBS" moodCode="EVN">
+                                        <!-- Severity observation template -->
+                                        <templateId
+                                            root="2.16.840.1.113883.10.20.22.4.8"/>
+                                        <code code="SEV" displayName="Severity Observation"
+                                            codeSystem="2.16.840.1.113883.5.4" codeSystemName="ActCode"/>
+                                        <text>
+                                            <reference value="#reactionseverity4"/>
+                                        </text>
+                                        <statusCode code="completed"/>
+                                        <value xsi:type="CD" code="255604002" displayName="Mild"
+                                            codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+                                    </observation>
+                                </entryRelationship>
+                            </observation>
+                        </entryRelationship>
+                        
+                        <!-- This severity observation describes the severity of the allergy/intolerance -->
+                        <entryRelationship typeCode="SUBJ" inversionInd="true">
+                            <observation classCode="OBS" moodCode="EVN">
+                                <!-- Severity observation template -->
+                                <templateId root="2.16.840.1.113883.10.20.22.4.8"/>
+                                <code code="SEV" displayName="Severity Observation"
+                                    codeSystem="2.16.840.1.113883.5.4" codeSystemName="ActCode"/>
+                                <text>
+                                    <reference value="#allergyseverity4"/>
+                                </text>
+                                <statusCode code="completed"/>
+                                <value xsi:type="CD" code="371923003" displayName="Mild to moderate"
+                                    codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+                            </observation>
+                        </entryRelationship>
+                    </observation>
+                </entryRelationship>
+            </act>
+        </entry>
+    </section>
+</component>

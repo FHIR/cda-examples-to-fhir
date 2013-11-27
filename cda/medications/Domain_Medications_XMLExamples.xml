@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Medications Domain Examples -->
+
+<!-- *********** Example 1: Patient taking pre-coordinated medication *********** -->
+<component>
+				<section>
+					<!-- *** Medications section with entries required *** -->
+					<templateId root="2.16.840.1.113883.10.20.22.2.1.1"/>
+					<code code="10160-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
+						displayName="HISTORY OF MEDICATION USE"/>
+					<title>MEDICATIONS</title>
+					<text>
+						<table border="1" width="100%">
+							<thead>
+								<tr>
+									<th>Medication</th>
+									<th>Directions</th>
+									<th>Start Date</th>
+									<th>Status</th>
+									<th>Indications</th>
+									<th>Fill Instructions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Proventil 0.09 MG/ACTUAT inhalant solution</td>
+									<td>2 puffs q6 hours PRN wheezing</td>
+									<td>Jan 3, 2011</td>
+									<td>Active</td>
+									<td>Asthma</td>
+									<td>Generic Substitition Allowed</td>
+								</tr>
+								<tr>
+									<td>Atenolol 25 MG Oral Tablet</td>
+									<td>1 every 12 hours Orally</td>
+									<td>Mar 18, 2012</td>
+									<td>Active</td>
+									<td>Hypertension</td>
+									<td>-none-</td>
+								</tr>
+							</tbody>
+						</table>
+					</text>
+					<entry typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<!-- ** Medication activity ** -->
+							<templateId root="2.16.840.1.113883.10.20.22.4.16"/>
+							<id root="cdbd33f0-6cde-11db-9fe1-0800200c9a66"/>
+							<statusCode code="active"/>
+							<effectiveTime xsi:type="IVL_TS">
+								<low value="20110103"/>
+							</effectiveTime>
+							<effectiveTime xsi:type="PIVL_TS" institutionSpecified="true"
+								operator="A">
+								<period value="6" unit="h"/>
+							</effectiveTime>
+							<routeCode code="C38216" codeSystem="2.16.840.1.113883.3.26.1.1"
+								codeSystemName="NCI Thesaurus"
+								displayName="RESPIRATORY (INHALATION)"/>
+							<doseQuantity value="2"/>
+							<administrationUnitCode code="PUFF" displayName="Puff"
+								codeSystem="2.16.840.1.113883.5.85"
+								codeSystemName="orderableDrugForm"/>
+							<consumable>
+								<manufacturedProduct classCode="MANU">
+									<!-- ** Medication information ** -->
+									<templateId root="2.16.840.1.113883.10.20.22.4.23"/>
+									<id root="2a620155-9d11-439e-92b3-5d9815ff4ee8"/>
+									<manufacturedMaterial>
+										<code code="573621"
+											displayName="Proventil 0.09 MG/ACTUAT inhalant solution"
+											codeSystem="2.16.840.1.113883.6.88"
+											codeSystemName="RxNorm"/>
+									</manufacturedMaterial>
+									<manufacturerOrganization>
+										<name>Medication Factory Inc.</name>
+									</manufacturerOrganization>
+								</manufacturedProduct>
+							</consumable>
+							<performer>
+								<assignedEntity>
+									<id extension="5555555555" root="2.16.840.1.113883.4.6"/>
+									<addr nullFlavor="UNK"/>
+									<telecom use="WP" value="tel: +1(555)555-1004"/>
+									<representedOrganization>
+										<id root="2.16.840.1.113883.19.5.9999.1393"/>
+										<name>Community Health and Hospitals</name>
+										<telecom use="WP" value="tel: +1(555)555-5000"/>
+										<addr nullFlavor="UNK"/>
+									</representedOrganization>
+								</assignedEntity>
+							</performer>
+							<participant typeCode="CSM">
+								<participantRole classCode="MANU">
+									<!-- ** Drug vehicle ** -->
+									<templateId root="2.16.840.1.113883.10.20.22.4.24"/>
+									<code code="412307009" displayName="drug vehicle"
+										codeSystem="2.16.840.1.113883.6.96"/>
+									<playingEntity classCode="MMAT">
+										<code code="324049" displayName="Aerosol"
+											codeSystem="2.16.840.1.113883.6.88"
+											codeSystemName="RxNorm"/>
+										<name>Aerosol</name>
+									</playingEntity>
+								</participantRole>
+							</participant>
+							<entryRelationship typeCode="RSON">
+								<observation classCode="OBS" moodCode="EVN">
+									<!-- ** Indication ** -->
+									<templateId root="2.16.840.1.113883.10.20.22.4.19"/>
+									<id root="db734647-fc99-424c-a864-7e3cda82e703"
+										extension="45665"/>
+									<code code="404684003" displayName="Finding"
+										codeSystem="2.16.840.1.113883.6.96"
+										codeSystemName="SNOMED CT"/>
+									<statusCode code="completed"/>
+									<effectiveTime>
+										<low value="20110103"/>
+									</effectiveTime>
+									<value xsi:type="CD" code="195967001" displayName="Asthma"
+										codeSystem="2.16.840.1.113883.6.96"/>
+								</observation>
+							</entryRelationship>
+							<entryRelationship typeCode="REFR">
+								<supply classCode="SPLY" moodCode="INT">
+									<!-- ** Medication supply order ** -->
+									<templateId root="2.16.840.1.113883.10.20.22.4.17"/>
+									<id nullFlavor="NI"/>
+									<statusCode code="completed"/>
+									<effectiveTime xsi:type="IVL_TS">
+										<low value="20070103"/>
+										<high nullFlavor="UNK"/>
+									</effectiveTime>
+									<repeatNumber value="1"/>
+									<quantity value="75"/>
+									<product>
+										<manufacturedProduct classCode="MANU">
+											<!-- ** Medication information ** -->
+											<templateId root="2.16.840.1.113883.10.20.22.4.23"/>
+											<id root="2a620155-9d11-439e-92b3-5d9815ff4ee8"/>
+											<manufacturedMaterial>
+												<code code="573621"
+												codeSystem="2.16.840.1.113883.6.88"
+												displayName="Proventil 0.09 MG/ACTUAT inhalant solution">
+												<translation code="219483"
+												codeSystem="2.16.840.1.113883.6.88"
+												displayName="Proventil HFA"
+												codeSystemName="RxNorm"/>
+												</code>
+											</manufacturedMaterial>
+											<manufacturerOrganization>
+												<name>Medication Factory Inc.</name>
+											</manufacturerOrganization>
+										</manufacturedProduct>
+									</product>
+									<author typeCode="AUT">
+										<templateId root="2.16.840.1.113883.10.20.22.4.119"/>
+										<time value="201208151235-0800"/>
+										<assignedAuthor>
+											<id extension="5555555555" root="2.16.840.1.113883.4.6"/>
+											<code code="207QA0505X" displayName="Adult Medicine"
+												codeSystem="2.16.840.1.113883.6.101"
+												codeSystemName="NUCC"/>
+											<addr>
+												<streetAddressLine>1004 Healthcare Drive </streetAddressLine>
+												<city>Portland</city>
+												<state>OR</state>
+												<postalCode>99123</postalCode>
+												<country>US</country>
+											</addr>
+											<telecom use="WP" value="tel:+1(555)555-1004"/>
+											<assignedPerson>
+												<name>
+												<given>Patricia</given>
+												<given qualifier="CL">Patty</given>
+												<family>Primary</family>
+												<suffix qualifier="AC">M.D.</suffix>
+												</name>
+											</assignedPerson>
+										</assignedAuthor>
+									</author>
+									<entryRelationship typeCode="SUBJ" inversionInd="true">
+										<act classCode="ACT" moodCode="INT">
+											<!-- ** Instruction ** -->
+											<templateId root="2.16.840.1.113883.10.20.22.4.20"/>
+											<code code="409073007"
+												codeSystem="2.16.840.1.113883.6.96"
+												displayName="instruction"/>
+											<text>
+												<reference value="#MedSec_1"/> label in spanish </text>
+											<statusCode code="completed"/>
+										</act>
+									</entryRelationship>
+								</supply>
+							</entryRelationship>
+							<entryRelationship typeCode="REFR">
+								<supply classCode="SPLY" moodCode="EVN">
+									<!-- ** Medication dispense ** -->
+									<templateId root="2.16.840.1.113883.10.20.22.4.18"/>
+									<id root="1.2.3.4.56789.1"
+										extension="cb734647-fc99-424c-a864-7e3cda82e704"/>
+									<statusCode code="completed"/>
+									<effectiveTime value="201208151450-0800"/>
+									<repeatNumber value="1"/>
+									<quantity value="75"/>
+									<product>
+										<manufacturedProduct classCode="MANU">
+											<!-- ** Medication information ** -->
+											<templateId root="2.16.840.1.113883.10.20.22.4.23"/>
+											<id root="2a620155-9d11-439e-92b3-5d9815ff4ee8"/>
+											<manufacturedMaterial>
+												<code code="573621"
+												codeSystem="2.16.840.1.113883.6.88"
+												displayName="Proventil 0.09 MG/ACTUAT inhalant solution">
+												<originalText>
+												<reference value="#MedSec_1"/>
+												</originalText>
+												</code>
+											</manufacturedMaterial>
+											<manufacturerOrganization>
+												<name>Medication Factory Inc.</name>
+											</manufacturerOrganization>
+										</manufacturedProduct>
+									</product>
+									<performer>
+										<assignedEntity>
+											<id extension="333222222" root="2.16.840.1.113883.4.6"/>
+											<addr>
+												<streetAddressLine>1016 Health
+												Drive</streetAddressLine>
+												<city>Portland</city>
+												<state>OR</state>
+												<postalCode>99123</postalCode>
+												<country>US</country>
+											</addr>
+											<telecom use="WP" value="tel:+1(555)555-1016"/>
+											<assignedPerson>
+												<name>
+												<given>Susan</given>
+												<family>Script</family>
+												<suffix qualifier="AC">Pharm.D.</suffix>
+												</name>
+											</assignedPerson>
+											<representedOrganization>
+												<name>People's Pharmacy</name>
+											</representedOrganization>
+										</assignedEntity>
+									</performer>
+								</supply>
+							</entryRelationship>
+							<precondition typeCode="PRCN">
+								<criterion>
+									<!-- ** Precondition for substance administration ** -->
+									<templateId root="2.16.840.1.113883.10.20.22.4.25"/>
+									<code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
+									<value xsi:type="CD" code="56018004"
+										codeSystem="2.16.840.1.113883.6.96" displayName="Wheezing"/>
+								</criterion>
+							</precondition>
+						</substanceAdministration>
+					</entry>
+					<entry typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<!-- ** Medication activity ** -->
+							<templateId root="2.16.840.1.113883.10.20.22.4.16"/>
+							<id root="6c844c75-aa34-411c-b7bd-5e4a9f206e29"/>
+							<statusCode code="active"/>
+							<effectiveTime xsi:type="IVL_TS">
+								<low value="20120318"/>
+							</effectiveTime>
+							<effectiveTime xsi:type="PIVL_TS" institutionSpecified="true"
+								operator="A">
+								<period value="12" unit="h"/>
+							</effectiveTime>
+							<routeCode code="C38288" codeSystem="2.16.840.1.113883.3.26.1.1"
+								codeSystemName="NCI Thesaurus" displayName="ORAL"/>
+							<doseQuantity value="1"/>
+							<consumable>
+								<manufacturedProduct classCode="MANU">
+									<!-- ** Medication information ** -->
+									<templateId root="2.16.840.1.113883.10.20.22.4.23"/>
+									<id root="2a620155-9d11-439e-92b3-5d9815ff4ee8"/>
+									<manufacturedMaterial>
+										<code code="197380" displayName="Atenolol 25 MG Oral Tablet"
+											codeSystem="2.16.840.1.113883.6.88"
+											codeSystemName="RxNorm"/>
+									</manufacturedMaterial>
+								</manufacturedProduct>
+							</consumable>
+							<entryRelationship typeCode="RSON">
+								<observation classCode="OBS" moodCode="EVN">
+									<!-- ** Indication ** -->
+									<templateId root="2.16.840.1.113883.10.20.22.4.19"/>
+									<id root="e63166c7-6482-4a44-83a1-37ccdbde725b"/>
+									<code code="404684003" displayName="Finding"
+										codeSystem="2.16.840.1.113883.6.96"
+										codeSystemName="SNOMED CT"/>
+									<statusCode code="completed"/>
+									<value xsi:type="CD" code="38341003" displayName="Hypertension"
+										codeSystem="2.16.840.1.113883.6.96"/>
+								</observation>
+							</entryRelationship>
+						</substanceAdministration>
+					</entry>
+				</section>
+</component>
+
+<!-- *********** Example 2: Patient is not known to be taking any medications *********** -->
+<component>
+    <section>
+        <!-- *** Medications section with entries required *** -->
+        <templateId root="2.16.840.1.113883.10.20.22.2.1.1"/>
+        <code code="10160-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"
+            displayName="HISTORY OF MEDICATION USE"/>
+        <title>MEDICATIONS</title>
+        <text>
+            <paragraph>No known medications</paragraph>
+        </text>
+        <entry typeCode="DRIV">
+            <substanceAdministration classCode="SBADM" moodCode="EVN" negationInd="true">
+                <!-- ** Medication activity ** -->
+                <templateId root="2.16.840.1.113883.10.20.22.4.16"/>
+                <id root="072f00fc-4f9d-4516-8d6f-ed00ed523fe0"/>
+                <statusCode code="active"/>
+                <effectiveTime xsi:type="IVL_TS">
+                    <low value="20110103"/>
+                </effectiveTime>
+                <consumable>
+                    <manufacturedProduct classCode="MANU">
+                        <!-- ** Medication information ** -->
+                        <templateId root="2.16.840.1.113883.10.20.22.4.23"/>
+                        <manufacturedMaterial>
+                            <code nullFlavor="OTH" codeSystem="2.16.840.1.113883.6.88">
+                                <translation code="410942007" displayName="drug or medication"
+                                    codeSystem="2.16.840.1.113883.6.96"  codeSystemName="SNOMED CT"/>
+                            </code>
+                        </manufacturedMaterial>
+                    </manufacturedProduct>
+                </consumable>
+            </substanceAdministration>
+        </entry>
+    </section>
+</component>
