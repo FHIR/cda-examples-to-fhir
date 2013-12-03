@@ -1,1 +1,25 @@
-<TODO>
+<MedicationPrescription xmlns="http://hl7.org/fhir">
+  <identifier>
+    <use value="official"/>
+    <system value="???"/>
+    <value value="cdbd33f0-6cde-11db-9fe1-0800200c9a66"/>
+  </identifier>
+  <text>
+    <status value="generated"/>
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      <table>
+        <thead>
+          ...
+        </thead>
+        <tr>
+          <td>Proventil 0.09 MG/ACTUAT inhalant solution</td>
+          <td>2 puffs q6 hours PRN wheezing</td>
+          <td>Jan 3, 2011</td>
+          <td>Active</td>
+          <td>Asthma</td>
+          <td>Generic Substitition Allowed</td>
+        </tr>
+      </table>
+    </div>
+  </text>
+</MedicationPrescription>

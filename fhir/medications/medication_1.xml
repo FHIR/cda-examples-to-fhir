@@ -1,0 +1,104 @@
+<MedicationPrescription xmlns="http://hl7.org/fhir">
+  <contained>
+    <Practitioner id="prescriber1">
+      <text>
+        <status value="generated"/>
+        <div xmlns="http://www.w3.org/1999/xhtml">
+          <p>Pattricia Patty Primary, M.D.</p>
+        </div>
+      </text>
+      <identifier>
+        <use value="official"/>
+        <system value="???"/>
+        <value value="5555555555"/>
+      </identifier>
+      <name>
+        <use value="official"/>
+        <family value="Primary"/>
+        <given value="Patricia"/>
+        <given value="Patty"/>
+        <suffix value="M.D."/>
+      </name>
+      <telecom>
+        <system value="phone"/>
+        <value value="tel:+1(555)555-1004"/>
+        <use value="work"/>
+      </telecom>
+      <address>
+        <use value="work"/>
+        <line value="1004 Healthcare Drive"/>
+        <city value="Portland"/>
+        <zip value="OR"/>
+        <country value="NLD"/>
+      </address>
+    </Practitioner>
+
+    <Medication id="med1">
+      <name value="Proventil 0.09 MG/ACTUAT inhalant solution"/>
+      <code>
+        <coding>
+          <system value="http://rxnorm???"/>
+          <code value="219483"/>
+          <display value="Proventil HFA"/>
+        </coding>
+        <coding>
+          <system value="2.16.840.1.113883.6.88"/>
+          <code value="573621"/>
+          <display value="Proventil 0.09 MG/ACTUAT inhalant solution"/>
+        </coding>
+      </code>
+      <manufacturer>
+        <!-- ups what is reference -->
+        <display value="Medication Factory Inc."/>
+      </manufacturer>
+      <!-- <isBrand value="true"/> -->
+      <!-- <kind value="product"/> -->
+    </Medication>
+
+  </contained>
+  <text>
+    <status value="generated"/>
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      <table>
+        <thead>
+          ...
+        </thead>
+        <tr>
+          <td>Proventil 0.09 MG/ACTUAT inhalant solution</td>
+          <td>2 puffs q6 hours PRN wheezing</td>
+          <td>Jan 3, 2011</td>
+          <td>Active</td>
+          <td>Asthma</td>
+          <td>Generic Substitition Allowed</td>
+        </tr>
+      </table>
+    </div>
+  </text>
+  <identifier>
+    <use value="official"/>
+    <system value="???"/>
+    <value value="cdbd33f0-6cde-11db-9fe1-0800200c9a66"/>
+  </identifier>
+  <dateWritten value="2013-05-25T19:32:52+01:00"/>
+  <status value="active"/>
+  <patient>
+    ...
+  </patient>
+  <prescriber>
+    <reference value="#prescriber1"/>
+    <display value="Pattricia Patty Primary M.D."/>
+  </prescriber>
+  <!-- <encounter> </encounter> -->
+  <reasonForPrescribing>
+    <coding>
+      <system value="http://snomed.info/id"/>
+      <code value="195967001"/>
+      <display value="Asthma"/>
+    </coding>
+    <!-- loosing effective time and finding marker -->
+  </reasonForPrescribing>
+  <medication> <!--   Linked to a RESOURCE Medication   -->
+    <reference value="#med1"/>
+    <display value=""/>
+  </medication>
+</MedicationPrescription>
